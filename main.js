@@ -84,4 +84,21 @@ if(copyEmailBtn){
             .catch(err => console.error("Error al copiar: ", err));
     });
 }
+// --- Botones "Comprar" en tienda que abren Discord y copian enlace ---
+const discordLink = "https://discord.gg/4YpJ2jbgnU";
 
+// IDs de los botones de tienda
+["buyWebBtn","buyThumbBtn","buyRenderBtn","buyConsultBtn"].forEach(id => {
+    const btn = document.getElementById(id);
+    if(btn){
+        btn.addEventListener('click', function(e){
+            e.preventDefault();
+            // Copiar enlace al portapapeles
+            navigator.clipboard.writeText(discordLink)
+                .then(() => showToast("Enlace de Discord copiado al portapapeles"))
+                .catch(err => console.error("Error al copiar: ", err));
+            // Abrir Discord en nueva pestaña
+            window.open(discordLink, "_blank");
+        });
+    }
+});
